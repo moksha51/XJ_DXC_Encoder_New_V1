@@ -29,7 +29,7 @@ public class App {
         // char.
         App.offSet = App.getFirstChar(encodedText);
         String newText = encodedText.substring(1);
-        System.out.println(App.offSet + App.commonCode(true, encodedText));
+        System.out.println(App.offSet + App.commonCode(false, encodedText));
         return commonCode(false, newText);
     }
 
