@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class App {
 
     // I can make it into classes but I thought for reading purposes I think it's
@@ -9,7 +7,7 @@ public class App {
             'Q', 'R',
             'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '*',
             '+', ',', '-', '.', '/' };
-    private static char offSet = 'B';
+    private static char offSet = 'F';
 
     public static void main(String[] args) throws Exception {
         String plainText = "Hello World";
@@ -22,6 +20,7 @@ public class App {
 
     public static String encode(String plainText) {
         // using common code cause same logic
+        System.out.println(App.offSet + App.commonCode(true, plainText));
         return App.offSet + App.commonCode(true, plainText);
     }
 
@@ -30,6 +29,7 @@ public class App {
         // char.
         App.offSet = App.getFirstChar(encodedText);
         String newText = encodedText.substring(1);
+        System.out.println(App.offSet + App.commonCode(true, encodedText));
         return commonCode(false, newText);
     }
 
@@ -60,7 +60,7 @@ public class App {
         jumps = App.findReferenceTableIndex(App.referenceTable, App.offSet);
         for (int i = 0; i < text.length(); i++) {
             for (int j = 0; j < referenceTable.length; j++) {
-                if (arr[i] == referenceTable[j]) {
+                if (arr[i] == referenceTable[j] && j < 43) {
                     if (isEncode == true) {
                         diff = j - jumps;
                     } else {
@@ -75,6 +75,8 @@ public class App {
                         turnaround = diff - referenceTable.length;
                         newArr[i] = referenceTable[turnaround];
                     }
+                } else if (arr[i] != referenceTable[j]) {
+                    newArr[i] = arr[i];
                 }
             }
         }
